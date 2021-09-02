@@ -2,10 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-main-body-col',
-  templateUrl: './main-body-col.component.html',
-  styleUrls: ['./main-body-col.component.scss']
+  templateUrl: './board-body-col.component.html',
+  styleUrls: ['./board-body-col.component.scss']
 })
-export class MainBodyColComponent implements OnInit {
+export class BoardBodyColComponent implements OnInit {
 
   @Input() color!: string
 
