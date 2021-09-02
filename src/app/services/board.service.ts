@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 interface Todo {
   id: number,
@@ -12,6 +12,7 @@ interface Todo {
 
 interface Board {
   id?: number,
+  title: string,
   list: {
     stCol: Todo[],
     ndCol: Todo[],
@@ -27,8 +28,37 @@ interface Board {
 })
 export class BoardService {
 
+  board: Board = {
+    id: 1,
+    title: 'Pizda Djigurda',
+    list: {
+      stCol: [{
+        id: 1,
+        title: 'Title Test',
+        dateCreate: 1,
+        dateExpire: 1,
+        whoCreate: 1,
+        whoVerified: 1,
+        whoTook: 1
+      }, {
+        id: 2,
+        title: 'Second Title to test',
+        dateCreate: 2,
+        dateExpire: 2,
+        whoCreate: 2,
+        whoVerified: 2,
+        whoTook: 2
+      }],
+      ndCol: [],
+      rdCol: [],
+      thCol: [],
+    },
+    adminsId: [],
+    usersId: []
+  }
 
 
+  constructor() {
 
-  constructor() { }
+  }
 }
