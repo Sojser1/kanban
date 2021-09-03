@@ -16,10 +16,10 @@ export interface Board {
   id?: number,
   title: string,
   list: {
-    stCol: Todo[],
-    ndCol: Todo[],
-    rdCol: Todo[],
-    thCol: Todo[],
+    toDo: Todo[],
+    inWork: Todo[],
+    finished: Todo[],
+    verified: Todo[],
   },
   adminsId: number[],
   usersId: number[]
