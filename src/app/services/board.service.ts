@@ -42,16 +42,88 @@ export class BoardService {
         whoTook: 1
       }, {
         id: 2,
-        title: 'Second Title to test',
+        title: 'Ершкв Title to test',
         dateCreate: 2,
         dateExpire: 2,
         whoCreate: 2,
         whoVerified: 2,
         whoTook: 2
+      }, {
+        id: 3,
+        title: 'Third Title to test',
+        dateCreate: 3,
+        dateExpire: 3,
+        whoCreate: 3,
+        whoVerified: 3,
+        whoTook: 3
+      }, {
+        id: 4,
+        title: 'Fourth Title to test',
+        dateCreate: 4,
+        dateExpire: 4,
+        whoCreate: 4,
+        whoVerified: 4,
+        whoTook: 4
       }],
-      ndCol: [],
-      rdCol: [],
-      thCol: [],
+      ndCol: [{
+        id: 1,
+        title: 'Title Test',
+        dateCreate: 1,
+        dateExpire: 1,
+        whoCreate: 1,
+        whoVerified: 1,
+        whoTook: 1
+      }, {
+        id: 2,
+        title: 'Ершкв Title to test',
+        dateCreate: 2,
+        dateExpire: 2,
+        whoCreate: 2,
+        whoVerified: 2,
+        whoTook: 2
+      }, {
+        id: 3,
+        title: 'Third Title to test',
+        dateCreate: 3,
+        dateExpire: 3,
+        whoCreate: 3,
+        whoVerified: 3,
+        whoTook: 3
+      },],
+      rdCol: [{
+        id: 1,
+        title: 'Title Test',
+        dateCreate: 1,
+        dateExpire: 1,
+        whoCreate: 1,
+        whoVerified: 1,
+        whoTook: 1
+      }, {
+        id: 2,
+        title: 'Ершкв Title to test',
+        dateCreate: 2,
+        dateExpire: 2,
+        whoCreate: 2,
+        whoVerified: 2,
+        whoTook: 2
+      },],
+      thCol: [{
+        id: 1,
+        title: 'Title Test',
+        dateCreate: 1,
+        dateExpire: 1,
+        whoCreate: 1,
+        whoVerified: 1,
+        whoTook: 1
+      }, {
+        id: 2,
+        title: 'Ершкв Title to test',
+        dateCreate: 2,
+        dateExpire: 2,
+        whoCreate: 2,
+        whoVerified: 2,
+        whoTook: 2
+      },],
     },
     adminsId: [],
     usersId: []

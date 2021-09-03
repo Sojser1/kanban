@@ -8,7 +8,8 @@ import {BoardService} from "../../../../services/board.service";
 })
 export class BoardBodyComponent implements OnInit {
 
-  title: string[] = ['on work', 'in progress', 'finished', 'verified']
+  title: string[] = ['to do', 'on work', 'finished', 'verified']
+  color: string[] = ['#ea7749', '#f0cc56','#4390ba', '#5cc474']
 
   constructor() { }
   ngOnInit(): void {
