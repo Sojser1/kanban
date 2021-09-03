@@ -10,8 +10,8 @@ import {BoardPageComponent} from "./foundation/pages/board-page/board-page.compo
 
 const routes: Routes = [
   {path: '', component:HomePageComponent},
-  {path: 'board', component:BoardPageComponent},
-  // {path: 'board/:id', component:BoardPageComponent},
+  // {path: 'board', component:BoardPageComponent},
+  {path: 'board/:id', component:BoardPageComponent},
   {path:'login', component:LoginPageComponent},
   {path:'reg', component:RegistPageComponent},
   {path:'boards', component:AllBoardsPageComponent},

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {BoardService} from "../../../../services/board.service";
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-board-header',
@@ -7,8 +6,8 @@ import {BoardService} from "../../../../services/board.service";
   styleUrls: ['./board-header.component.scss']
 })
 export class BoardHeaderComponent implements OnInit {
-
-  constructor(public BoardService:BoardService) { }
+  @Input() title!:string
+  constructor() { }
 
   ngOnInit(): void {
   }

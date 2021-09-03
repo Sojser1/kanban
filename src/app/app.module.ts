@@ -16,6 +16,7 @@ import { BodyComponent } from './foundation/body/body.component';
 import { AllBoardsPageComponent } from './foundation/pages/all-boards-page/all-boards-page.component';
 import { ErrorPageComponent } from './foundation/pages/error-page/error-page.component';
 import { HomePageComponent } from './foundation/pages/home-page/home-page.component';
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { HomePageComponent } from './foundation/pages/home-page/home-page.compon
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

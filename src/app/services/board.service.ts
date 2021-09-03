@@ -1,6 +1,8 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Params} from "@angular/router";
 
-interface Todo {
+export interface Todo {
   id: number,
   title: string,
   dateCreate: number,
@@ -10,7 +12,7 @@ interface Todo {
   whoTook: number
 }
 
-interface Board {
+export interface Board {
   id?: number,
   title: string,
   list: {
@@ -23,114 +25,54 @@ interface Board {
   usersId: number[]
 }
 
+export interface PostPayload {
+  id?: number,
+  title?: string,
+  list?: {
+    stCol: Todo[],
+    ndCol: Todo[],
+    rdCol: Todo[],
+    thCol: Todo[],
+  },
+  adminsId?: number[],
+  usersId?: number[]
+}
+
 @Injectable({
   providedIn: 'root'
 })
-export class BoardService {
+export class BoardService implements OnInit{
 
-  board: Board = {
-    id: 1,
-    title: 'Pizda Djigurda',
-    list: {
-      stCol: [{
-        id: 1,
-        title: 'Title Test',
-        dateCreate: 1,
-        dateExpire: 1,
-        whoCreate: 1,
-        whoVerified: 1,
-        whoTook: 1
-      }, {
-        id: 2,
-        title: 'Ершкв Title to test',
-        dateCreate: 2,
-        dateExpire: 2,
-        whoCreate: 2,
-        whoVerified: 2,
-        whoTook: 2
-      }, {
-        id: 3,
-        title: 'Third Title to test',
-        dateCreate: 3,
-        dateExpire: 3,
-        whoCreate: 3,
-        whoVerified: 3,
-        whoTook: 3
-      }, {
-        id: 4,
-        title: 'Fourth Title to test',
-        dateCreate: 4,
-        dateExpire: 4,
-        whoCreate: 4,
-        whoVerified: 4,
-        whoTook: 4
-      }],
-      ndCol: [{
-        id: 1,
-        title: 'Title Test',
-        dateCreate: 1,
-        dateExpire: 1,
-        whoCreate: 1,
-        whoVerified: 1,
-        whoTook: 1
-      }, {
-        id: 2,
-        title: 'Ершкв Title to test',
-        dateCreate: 2,
-        dateExpire: 2,
-        whoCreate: 2,
-        whoVerified: 2,
-        whoTook: 2
-      }, {
-        id: 3,
-        title: 'Third Title to test',
-        dateCreate: 3,
-        dateExpire: 3,
-        whoCreate: 3,
-        whoVerified: 3,
-        whoTook: 3
-      },],
-      rdCol: [{
-        id: 1,
-        title: 'Title Test',
-        dateCreate: 1,
-        dateExpire: 1,
-        whoCreate: 1,
-        whoVerified: 1,
-        whoTook: 1
-      }, {
-        id: 2,
-        title: 'Ершкв Title to test',
-        dateCreate: 2,
-        dateExpire: 2,
-        whoCreate: 2,
-        whoVerified: 2,
-        whoTook: 2
-      },],
-      thCol: [{
-        id: 1,
-        title: 'Title Test',
-        dateCreate: 1,
-        dateExpire: 1,
-        whoCreate: 1,
-        whoVerified: 1,
-        whoTook: 1
-      }, {
-        id: 2,
-        title: 'Ершкв Title to test',
-        dateCreate: 2,
-        dateExpire: 2,
-        whoCreate: 2,
-        whoVerified: 2,
-        whoTook: 2
-      },],
-    },
-    adminsId: [],
-    usersId: []
+  //Пока урлы будут лежать тут, потом перенесем в окружение (мб)
+  backUrl: string = 'https://kanban322.herokuapp.com'
+  boardUrl: string = '612f67b426a1405dbdd4a265'
+
+
+
+
+
+  constructor(private http:HttpClient) {
+    this.getBoard(this.boardUrl)
   }
 
+  ngOnInit(): void {
 
-  constructor() {
+  }
 
+  getBoard(id:string) {
+    return this.http.get<{board:Board}>(this.backUrl + '/boards/' + id)
+  }
+
+  updateBoard(payload:PostPayload, id:string) {
+   return this.http.put(this.backUrl + 'boards/' + id,payload )
+
+  }
+
+  createBoard(title:string, adminsId: number[]){
+    return this.http.post<{board:Board}>(this.backUrl + 'boards/', {title,adminsId})
+  }
+
+  deleleBoard(id:number){
+    return this.http.delete(this.backUrl + 'boards/' + id)
   }
 }

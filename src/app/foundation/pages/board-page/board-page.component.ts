@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {BoardService} from "../../../services/board.service";
+import {BoardService, Board} from "../../../services/board.service";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-board-page',
@@ -8,9 +9,27 @@ import {BoardService} from "../../../services/board.service";
 })
 export class BoardPageComponent implements OnInit {
 
-  constructor(public BoardService:BoardService) { }
+  board: Board = {
+    title: '',
+    list: {
+      stCol: [],
+      ndCol: [],
+      rdCol: [],
+      thCol: [],
+    },
+    adminsId: [],
+    usersId: []
+  }
+
+  constructor(public BoardService:BoardService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params:Params) =>{
+      this.BoardService.getBoard(params.id)
+      .subscribe(res => {
+        this.board = res.board
+      }, error => console.log(error))
+    })
   }
 
 }
