@@ -1,6 +1,6 @@
 import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Params} from "@angular/router";
+import {Observable} from "rxjs";
 
 export interface Todo {
   id: number,
@@ -45,30 +45,28 @@ export class BoardService implements OnInit{
 
   //Пока урлы будут лежать тут, потом перенесем в окружение (мб)
   backUrl: string = 'https://kanban322.herokuapp.com'
-  boardUrl: string = '612f67b426a1405dbdd4a265'
 
 
 
 
 
   constructor(private http:HttpClient) {
-    this.getBoard(this.boardUrl)
   }
 
   ngOnInit(): void {
 
   }
 
-  getBoard(id:string) {
+  getBoard(id:string): Observable<{board:Board}> {
     return this.http.get<{board:Board}>(this.backUrl + '/boards/' + id)
   }
 
-  updateBoard(payload:PostPayload, id:string) {
-   return this.http.put(this.backUrl + 'boards/' + id,payload )
+  updateBoard(payload:PostPayload, id:string):Observable<{board:Board}> {
+   return this.http.put<{board:Board}>(this.backUrl + 'boards/' + id,payload )
 
   }
 
-  createBoard(title:string, adminsId: number[]){
+  createBoard(title:string, adminsId: number[]): Observable<{board:Board}>{
     return this.http.post<{board:Board}>(this.backUrl + 'boards/', {title,adminsId})
   }
 
