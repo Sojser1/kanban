@@ -5,7 +5,7 @@
 </div>
 
 <div class="board">
-  <app-todo *ngFor="let todo of list" [todo]="todo"></app-todo>
+  <app-todo *ngFor="let todo of list" [todo]="todo" (delTodo)="delTodo($event)"></app-todo>
   <app-new-todo *ngIf="isActiveAdd" (addNewTodo)="createNewTodo($event)"></app-new-todo>
 </div>
 

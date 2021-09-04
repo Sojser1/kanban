@@ -1,4 +1,4 @@
-<app-board-body-col [option]="option.toDo" [list]="list.toDo"></app-board-body-col>
+<app-board-body-col [option]="option.toDo" [list]="list.toDo" (listUpdated)="listUpdated()"></app-board-body-col>
 <app-board-body-col [option]="option.inWork" [list]="list.inWork"></app-board-body-col>
 <app-board-body-col [option]="option.finished" [list]="list.finished"></app-board-body-col>
 <app-board-body-col [option]="option.verified" [list]="list.verified"></app-board-body-col>

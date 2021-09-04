@@ -1,6 +1,6 @@
 import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 
 export interface Todo {
   id: number,
@@ -38,9 +38,6 @@ export class BoardService implements OnInit{
   backUrl: string = 'https://kanban322.herokuapp.com'
 
 
-
-
-
   constructor(private http:HttpClient) {
   }
 
@@ -53,7 +50,7 @@ export class BoardService implements OnInit{
   }
 
   updateBoard(board: Board):Observable<{board:Board}> {
-   return this.http.put<{board:Board}>(this.backUrl + '/boards/' + board._id,board )
+   return this.http.put<{board:Board}>(this.backUrl + '/boards/' + board._id, {board} )
   }
 
   createBoard(title:string, adminsId: number[]): Observable<{board:Board}>{
@@ -62,5 +59,14 @@ export class BoardService implements OnInit{
 
   deleleBoard(id:number){
     return this.http.delete(this.backUrl + '/boards/' + id)
+  }
+
+  observeBoard(board: any) {
+    const subject = new BehaviorSubject(board)
+    console.log(board)
+    subject.subscribe(el => {
+      console.log('observe board ')
+      // console.log(el)
+    })
   }
 }

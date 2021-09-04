@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Todo} from "../../../../services/board.service";
 
 export interface ColOption {
@@ -48,6 +48,13 @@ export class BoardBodyComponent implements OnInit {
 
 
   @Input() list!: { toDo: Todo[], inWork: Todo[], finished: Todo[], verified: Todo[] }
+
+  @Output() updateList: EventEmitter<null> = new EventEmitter<null>()
+
+
+  listUpdated() {
+    this.updateList.emit()
+  }
 
 
   constructor() {

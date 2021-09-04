@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NewTodo} from "./new-todo/new-todo.component";
 import {ColOption} from "../board-body.component";
+import {BoardService} from "../../../../../services/board.service";
 
 interface Todo {
   id: number,
@@ -19,8 +20,13 @@ interface Todo {
 })
 export class BoardBodyColComponent implements OnInit {
 
+  constructor(public BoardService: BoardService) { }
+
+
   @Input() option!: ColOption
   @Input() list!: Todo[]
+
+  @Output() listUpdated: EventEmitter<null> = new EventEmitter<null>()
 
 
   isActiveAdd: boolean = false
@@ -43,9 +49,20 @@ export class BoardBodyColComponent implements OnInit {
 
   updateList(todo: Todo){
     this.list.push(todo)
+    this.listUpdated.emit()
   }
 
-  constructor() { }
+
+  delTodo(id: number){
+    const idx:number = this.list.findIndex(item =>{
+      return item.id === id
+    })
+
+    this.list.splice(idx, 1)
+
+    this.listUpdated.emit()
+  }
+
 
   ngOnInit(): void {
   }

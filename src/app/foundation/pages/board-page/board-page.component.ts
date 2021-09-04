@@ -1,6 +1,7 @@
 import {Component, DoCheck, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import {BoardService, Board} from "../../../services/board.service";
 import {ActivatedRoute, Params} from "@angular/router";
+import {BehaviorSubject} from "rxjs";
 
 
 
@@ -9,8 +10,9 @@ import {ActivatedRoute, Params} from "@angular/router";
   templateUrl: './board-page.component.html',
   styleUrls: ['./board-page.component.scss']
 })
-export class BoardPageComponent implements OnInit, DoCheck, OnChanges, OnDestroy {
-  constructor(public BoardService:BoardService, private route:ActivatedRoute) { }
+export class BoardPageComponent implements OnInit {
+  constructor(public BoardService:BoardService, private route:ActivatedRoute) {
+  }
 
 
   hasError: boolean = false
@@ -29,6 +31,9 @@ export class BoardPageComponent implements OnInit, DoCheck, OnChanges, OnDestroy
     usersId: []
   }
 
+  subject: BehaviorSubject<Board | null> = new BehaviorSubject<Board | null>(this.board)
+
+
   fetchBoard() {
     this.isLoading = true
     this.route.params.subscribe((params:Params) =>{
@@ -40,35 +45,21 @@ export class BoardPageComponent implements OnInit, DoCheck, OnChanges, OnDestroy
     })
   }
 
-  updateBoard(list:any) {
-    this.isLoading = true
-    this.board.list = list
-    console.log(this.board)
-    this.isLoading = false
-    // this.BoardService.updateBoard(this.board)
-    //   .subscribe(res => {
-    //     console.log(res)
-    //     this.isLoading = false
-    //   }, error => console.log(error))
+  lookingBoard(list:any) {
+    // this.BoardService.observeBoard(list)
   }
 
+  updateList(){
+    this.BoardService.updateBoard(this.board)
+      .subscribe(res => {
+        console.log('updated')
+      })
+  }
 
   ngOnInit(): void {
     this.fetchBoard()
-  }
 
-  ngOnDestroy(): void {
-  }
-
-  ngDoCheck(): void {
-    console.log('do check')
-  }
-
-  ngOnChanges(s:any):void {
-    console.log('changes')
-  }
-
-
+ }
 
 }
 
