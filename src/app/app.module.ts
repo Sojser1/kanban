@@ -17,6 +17,8 @@ import { AllBoardsPageComponent } from './foundation/pages/all-boards-page/all-b
 import { ErrorPageComponent } from './foundation/pages/error-page/error-page.component';
 import { HomePageComponent } from './foundation/pages/home-page/home-page.component';
 import {HttpClientModule} from "@angular/common/http";
+import { LoaderComponent } from './foundation/pages/board-page/loader/loader.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -36,11 +38,13 @@ import {HttpClientModule} from "@angular/common/http";
     AllBoardsPageComponent,
     ErrorPageComponent,
     HomePageComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

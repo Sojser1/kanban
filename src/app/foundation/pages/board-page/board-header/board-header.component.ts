@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class BoardHeaderComponent implements OnInit {
   @Input() title!:string
+  @Input() users!:number[]
   constructor() { }
 
   ngOnInit(): void {

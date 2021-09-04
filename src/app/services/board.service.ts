@@ -13,7 +13,8 @@ export interface Todo {
 }
 
 export interface Board {
-  id?: number,
+  id: number,
+  _id?: number
   title: string,
   list: {
     toDo: Todo[],
@@ -25,18 +26,8 @@ export interface Board {
   usersId: number[]
 }
 
-export interface PostPayload {
-  id?: number,
-  title?: string,
-  list?: {
-    stCol: Todo[],
-    ndCol: Todo[],
-    rdCol: Todo[],
-    thCol: Todo[],
-  },
-  adminsId?: number[],
-  usersId?: number[]
-}
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -61,16 +52,15 @@ export class BoardService implements OnInit{
     return this.http.get<{board:Board}>(this.backUrl + '/boards/' + id)
   }
 
-  updateBoard(payload:PostPayload, id:string):Observable<{board:Board}> {
-   return this.http.put<{board:Board}>(this.backUrl + 'boards/' + id,payload )
-
+  updateBoard(board: Board):Observable<{board:Board}> {
+   return this.http.put<{board:Board}>(this.backUrl + '/boards/' + board._id,board )
   }
 
   createBoard(title:string, adminsId: number[]): Observable<{board:Board}>{
-    return this.http.post<{board:Board}>(this.backUrl + 'boards/', {title,adminsId})
+    return this.http.post<{board:Board}>(this.backUrl + '/boards/', {title,adminsId})
   }
 
   deleleBoard(id:number){
-    return this.http.delete(this.backUrl + 'boards/' + id)
+    return this.http.delete(this.backUrl + '/boards/' + id)
   }
 }

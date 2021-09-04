@@ -1,13 +1,15 @@
 <div class="title" [ngStyle]="{
-  background: color
+  background: option.color
 }">
-  <h2>{{title | uppercase}} </h2>
+  <h2>{{option.title | uppercase}} </h2>
 </div>
 
 <div class="board">
+  <app-todo *ngFor="let todo of list" [todo]="todo"></app-todo>
+  <app-new-todo *ngIf="isActiveAdd" (addNewTodo)="createNewTodo($event)"></app-new-todo>
 </div>
 
-<div class="board-btn">
+<div class="board-btn" (click)="isActiveAdd = true" *ngIf="!isActiveAdd && option.isActiveBtn">
   <p>Добавить задачу</p>
 </div>
 

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BoardService} from "../../../../../services/board.service";
+import {NewTodo} from "./new-todo/new-todo.component";
+import {ColOption} from "../board-body.component";
 
 interface Todo {
   id: number,
@@ -18,8 +19,31 @@ interface Todo {
 })
 export class BoardBodyColComponent implements OnInit {
 
-  @Input() color!: string
-  @Input() title!: string
+  @Input() option!: ColOption
+  @Input() list!: Todo[]
+
+
+  isActiveAdd: boolean = false
+
+  createNewTodo(newTodo: NewTodo){
+    this.isActiveAdd = false
+    const todo: Todo = {
+      id: Date.now(),
+      title: newTodo.title,
+      dateCreate: Date.now(),
+      dateExpire: 0,
+      whoCreate: 0,
+      whoVerified: 0,
+      whoTook: 0
+    }
+
+    this.updateList(todo)
+
+      }
+
+  updateList(todo: Todo){
+    this.list.push(todo)
+  }
 
   constructor() { }
 

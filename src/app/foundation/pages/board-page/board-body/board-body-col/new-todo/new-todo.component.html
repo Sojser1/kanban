@@ -1,5 +1,9 @@
 <textarea
   type="text"
   placeholder="Введите задачу"
+  #textareaValue
 ></textarea>
 
+<div class="board-btn" (click)="createTodo(textareaValue.value)">
+  <p>Добавить задачу</p>
+</div>

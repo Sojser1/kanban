@@ -16,3 +16,19 @@ textarea {
   resize: none;
   border: none;
 }
+
+
+.board-btn {
+  cursor: pointer;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #2c2f33;
+
+  p {
+    margin-left: 40px;
+  }
+}
+
+

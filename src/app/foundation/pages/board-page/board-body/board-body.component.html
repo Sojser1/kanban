@@ -1,6 +1,5 @@
-<!--<app-board-body-col [list]="list" *NgFor="let list of "></app-board-body-col>-->
-<app-board-body-col [title]="title[0]" [color]="color[0]"></app-board-body-col>
-<app-board-body-col [title]="title[1]" [color]="color[1]"></app-board-body-col>
-<app-board-body-col [title]="title[2]" [color]="color[2]"></app-board-body-col>
-<app-board-body-col [title]="title[3]" [color]="color[3]"></app-board-body-col>
+<app-board-body-col [option]="option.toDo" [list]="list.toDo"></app-board-body-col>
+<app-board-body-col [option]="option.inWork" [list]="list.inWork"></app-board-body-col>
+<app-board-body-col [option]="option.finished" [list]="list.finished"></app-board-body-col>
+<app-board-body-col [option]="option.verified" [list]="list.verified"></app-board-body-col>
 

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+
+export interface NewTodo {
+  title: string
+}
 
 @Component({
   selector: 'app-new-todo',
@@ -8,6 +12,22 @@ import { Component, OnInit } from '@angular/core';
 export class NewTodoComponent implements OnInit {
 
   constructor() { }
+
+  @Output() addNewTodo: EventEmitter<NewTodo> = new EventEmitter<NewTodo>()
+
+  newTodo: NewTodo = {
+    title: ''
+}
+
+
+  createTodo(title:string):void{
+      if(!title.trim()){
+        return //написать ошибку или валидатор
+      }
+      this.newTodo.title = title
+      this.addNewTodo.emit(this.newTodo)
+  }
+
 
   ngOnInit(): void {
   }

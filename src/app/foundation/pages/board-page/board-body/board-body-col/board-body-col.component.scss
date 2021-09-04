@@ -12,7 +12,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ed844c;
   color: #373b40;
   box-shadow: 2px 2px 6px 0px #0000001A;
 }
@@ -21,6 +20,7 @@
 .board {
   display: flex;
   flex-direction: column;
+  word-wrap: break-word;
 
   &-btn {
     cursor: pointer;
