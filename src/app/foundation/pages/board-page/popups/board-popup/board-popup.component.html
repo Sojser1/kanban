@@ -1,0 +1,41 @@
+<div class="popup">
+  <div class="popup__header">
+    <div class="popup__header-title" *ngIf="!isEditTitle; else editBlock">
+      <h2>{{board.title | titlecase}}</h2>
+      <img
+        (click)="isEditTitle = true"
+        src="../../../../../../assets/pen.svg">
+    </div>
+    <ng-template #editBlock>
+      <div class="popup__header-title">
+        <input type="text" placeholder="Введите название" #editTitle>
+        <img
+          (click)="changeBoardTitle(editTitle.value)"
+          src="../../../../../../assets/checklist.svg"
+          alt="">
+      </div>
+    </ng-template>
+    <div class="del-btn" [mat-dialog-close] (click)="closePopup()">
+      <img src="../../../../../../assets/clear.svg">
+    </div>
+  </div>
+  <div class="popup__admins">
+    <p>Админы: <span *ngFor="let admin of board.adminsId">{{admin}}, </span></p>
+  </div>
+  <div class="popup__users">
+    <p>Пользователи : <span *ngFor="let user of board.usersId">{{user}},</span></p>
+  </div>
+  <div class="popup__option">
+    <div class="popup__option-deadline">
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+    </div>
+    <div class="">блок справа</div>
+  </div>
+  <div class="delete-btn" (click)="deleteBoard()">
+    УДАЛИТЬ
+  </div>
+</div>

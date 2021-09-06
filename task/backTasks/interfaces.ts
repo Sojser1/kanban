@@ -2,7 +2,7 @@ interface User {
   login:string,
   password:number,
   id?: number,
-  tasks: number,
+  tasks: number[],
   boards: number[]
 }
 

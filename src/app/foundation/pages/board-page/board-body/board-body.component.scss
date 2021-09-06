@@ -1,8 +1,60 @@
-:host {
+.drag-group {
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(4, 22%);
   grid-column-gap: 40px;
   justify-content: center;
   margin-top: 15px;
+}
+
+
+.drag-list {
+  background-color: #2c2f33;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: fit-content;
+
+
+  .title {
+    text-align: center;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #373b40;
+    box-shadow: 2px 2px 6px 0 #0000001A;
+  }
+
+
+
+}
+
+
+.board {
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+
+  &-btn {
+    background-color: #2c2f33;
+    cursor: pointer;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    p {
+      margin-left: 10%;
+    }
+
+    &:hover {
+      background-color: #26282c;
+    }
+  }
+}
+
+
+.drag-list {
+  margin-bottom: 5px;
 }

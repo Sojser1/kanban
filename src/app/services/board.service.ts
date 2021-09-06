@@ -1,6 +1,6 @@
 import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 
 export interface Todo {
   id: number,
@@ -61,12 +61,5 @@ export class BoardService implements OnInit{
     return this.http.delete(this.backUrl + '/boards/' + id)
   }
 
-  observeBoard(board: any) {
-    const subject = new BehaviorSubject(board)
-    console.log(board)
-    subject.subscribe(el => {
-      console.log('observe board ')
-      // console.log(el)
-    })
-  }
+
 }

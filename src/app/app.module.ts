@@ -8,9 +8,8 @@ import { RegistPageComponent } from './foundation/pages/regist-page/regist-page.
 import { FooterComponent } from './foundation/footer/footer.component';
 import { BoardHeaderComponent } from './foundation/pages/board-page/board-header/board-header.component';
 import { BoardBodyComponent } from './foundation/pages/board-page/board-body/board-body.component';
-import { BoardBodyColComponent } from './foundation/pages/board-page/board-body/board-body-col/board-body-col.component';
-import {NewTodoComponent} from "./foundation/pages/board-page/board-body/board-body-col/new-todo/new-todo.component";
-import {TodoComponent} from "./foundation/pages/board-page/board-body/board-body-col/todo/todo.component";
+import {NewTodoComponent} from "./foundation/pages/board-page/board-body/new-todo/new-todo.component";
+import {TodoComponent} from "./foundation/pages/board-page/board-body/todo/todo.component";
 import {AppRoutingModule} from "./app-routing.module";
 import { BodyComponent } from './foundation/body/body.component';
 import { AllBoardsPageComponent } from './foundation/pages/all-boards-page/all-boards-page.component';
@@ -19,7 +18,12 @@ import { HomePageComponent } from './foundation/pages/home-page/home-page.compon
 import {HttpClientModule} from "@angular/common/http";
 import { LoaderComponent } from './foundation/pages/board-page/loader/loader.component';
 import {ReactiveFormsModule} from "@angular/forms";
-
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import { MatDialogModule} from "@angular/material/dialog";
+import { TodoPopupComponent } from './foundation/pages/board-page/popups/todo-popup/todo-popup.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { BoardPopupComponent } from './foundation/pages/board-page/popups/board-popup/board-popup.component';
+import { MarkFilterPipe } from './pipes/mark-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,6 @@ import {ReactiveFormsModule} from "@angular/forms";
     FooterComponent,
     BoardHeaderComponent,
     BoardBodyComponent,
-    BoardBodyColComponent,
     NewTodoComponent,
     TodoComponent,
     BodyComponent,
@@ -39,12 +42,18 @@ import {ReactiveFormsModule} from "@angular/forms";
     ErrorPageComponent,
     HomePageComponent,
     LoaderComponent,
+    TodoPopupComponent,
+    BoardPopupComponent,
+    MarkFilterPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    DragDropModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

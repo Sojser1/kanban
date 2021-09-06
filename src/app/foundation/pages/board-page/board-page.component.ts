@@ -1,9 +1,6 @@
-import {Component, DoCheck, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BoardService, Board} from "../../../services/board.service";
 import {ActivatedRoute, Params} from "@angular/router";
-import {BehaviorSubject} from "rxjs";
-
-
 
 @Component({
   selector: 'app-board-page',
@@ -11,7 +8,10 @@ import {BehaviorSubject} from "rxjs";
   styleUrls: ['./board-page.component.scss']
 })
 export class BoardPageComponent implements OnInit {
-  constructor(public BoardService:BoardService, private route:ActivatedRoute) {
+  constructor(
+    public BoardService:BoardService,
+    private route:ActivatedRoute,
+    ) {
   }
 
 
@@ -31,8 +31,6 @@ export class BoardPageComponent implements OnInit {
     usersId: []
   }
 
-  subject: BehaviorSubject<Board | null> = new BehaviorSubject<Board | null>(this.board)
-
 
   fetchBoard() {
     this.isLoading = true
@@ -45,16 +43,14 @@ export class BoardPageComponent implements OnInit {
     })
   }
 
-  lookingBoard(list:any) {
-    // this.BoardService.observeBoard(list)
-  }
-
   updateList(){
     this.BoardService.updateBoard(this.board)
       .subscribe(res => {
-        console.log('updated')
-      })
+      }, error => console.log(error))
+
   }
+
+
 
   ngOnInit(): void {
     this.fetchBoard()

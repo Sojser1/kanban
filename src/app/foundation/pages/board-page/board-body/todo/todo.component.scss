@@ -1,0 +1,147 @@
+
+:host {
+  background-color: #505050;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+  min-height: 100px;
+  margin-top: 5px;
+  position: relative;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.task__color {
+  display: flex;
+  color: black;
+
+  &-circle {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin-right: 4px;
+    overflow: hidden;
+    color: transparent;
+    cursor: default;
+  }
+
+  .red-color {
+    background-color: red;
+  }
+
+  .green-color {
+    background-color: green;
+  }
+
+  .blue-color {
+    background-color: blue;
+  }
+
+  .white-color {
+    background-color: white;
+  }
+
+  .yellow-color {
+    background-color: yellow;
+  }
+
+
+}
+
+.task__color-active {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: .5s;
+  color: black;
+
+  &-block {
+    margin-top: 2px;
+    display: inline-block;
+    border-radius: 5px;
+    min-width: 25%;
+    text-align: center;
+    font-size: 12px;
+    padding: 1px 2px;
+    cursor: default;
+  }
+
+}
+
+.open-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 2px;
+  right: 4px;
+
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: #939393;
+    transition: .15s;
+
+    &:hover {
+      fill: #2c2f33;
+      transition: .2s;
+    }
+  }
+
+}
+
+
+.info-block {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+
+
+  .time {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px 4px;
+    background-color: yellow;
+    font-size: 13px;
+    border-radius: 5px;
+
+    svg {
+      margin-right: 5px;
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  .green {
+    background-color: #5cc474;
+    color: black;
+
+    svg {
+      fill: black;
+    }
+
+  }
+
+  .yellow {
+    background-color: #f0cc56;
+    color: black;
+
+    svg {
+      fill: black;
+    }
+  }
+
+  .red {
+    background-color: #ea7749;
+    color: white;
+
+    svg {
+      fill: white;
+    }
+  }
+}
+
+

@@ -1,5 +1,79 @@
-<app-board-body-col [option]="option.toDo" [list]="list.toDo" (listUpdated)="listUpdated()"></app-board-body-col>
-<app-board-body-col [option]="option.inWork" [list]="list.inWork"></app-board-body-col>
-<app-board-body-col [option]="option.finished" [list]="list.finished"></app-board-body-col>
-<app-board-body-col [option]="option.verified" [list]="list.verified"></app-board-body-col>
+<div class="drag-group" >
+  <div class="todo-col">
+    <div (cdkDropListDropped)="drop($event,todos)"
+         [cdkDropListConnectedTo]="['in-work-list', 'finished-list', 'verified']"
+         [cdkDropListData]="todos"
+         cdkDropList
+         class="drag-list"
+         id="todo-list">
+      <div class="title" [ngStyle]="{background: option.toDo.color}">
+        <h2>{{option.toDo.title | uppercase}} </h2>
+      </div>
+      <app-todo
+        cdkDrag
+        *ngFor="let todo of todos"
+        [todo]="todo"
+        (openPopup)="openDialog(todo)"
+      ></app-todo>
 
+    </div>
+
+    <app-new-todo
+      (addNewTodo)="addNewTodo($event)"
+      *ngIf="isActiveAdd"
+    ></app-new-todo>
+
+    <div class="board-btn" *ngIf="!isActiveAdd" (click)="this.isActiveAdd = true">
+      <p>Добавить задачу</p>
+    </div>
+  </div>
+  <div class="drag-list"
+       cdkDropList
+       id="in-work-list"
+       [cdkDropListData]="inWork"
+       [cdkDropListConnectedTo]="['todo-list', 'finished-list', 'verified']"
+       (cdkDropListDropped)="drop($event,inWork)">
+    <div class="title" [ngStyle]="{background: option.inWork.color}">
+      <h2>{{option.inWork.title | uppercase}} </h2>
+    </div>
+    <app-todo
+      cdkDrag
+      *ngFor="let todo of inWork"
+      (openPopup)="openDialog(todo)"
+      [todo]="todo"
+    ></app-todo>
+
+  </div>
+  <div class="drag-list"
+       cdkDropList
+       [cdkDropListData]="finished"
+       id="finished-list" [cdkDropListConnectedTo]="['todo-list', 'in-work-list', 'verified']"
+       (cdkDropListDropped)="drop($event, finished)">
+    <div class="title" [ngStyle]="{background: option.finished.color}">
+      <h2>{{option.finished.title | uppercase}} </h2>
+    </div>
+    <app-todo
+      cdkDrag
+      *ngFor="let todo of finished"
+      (openPopup)="openDialog(todo)"
+      [todo]="todo"
+    ></app-todo>
+
+  </div>
+  <div class="drag-list"
+       cdkDropList
+       [cdkDropListData]="verified"
+       id="verified" [cdkDropListConnectedTo]="['in-work-list', 'finished-list', 'todo-list']"
+       (cdkDropListDropped)="drop($event, verified)">
+    <div class="title" [ngStyle]="{background: option.verified.color}">
+      <h2>{{option.verified.title | uppercase}} </h2>
+    </div>
+    <app-todo
+      cdkDrag
+      *ngFor="let todo of verified"
+      (openPopup)="openDialog(todo)"
+      [todo]="todo"
+    ></app-todo>
+
+  </div>
+</div>
