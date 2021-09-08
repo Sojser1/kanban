@@ -15,15 +15,16 @@ import { BodyComponent } from './foundation/body/body.component';
 import { AllBoardsPageComponent } from './foundation/pages/all-boards-page/all-boards-page.component';
 import { ErrorPageComponent } from './foundation/pages/error-page/error-page.component';
 import { HomePageComponent } from './foundation/pages/home-page/home-page.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { LoaderComponent } from './foundation/pages/board-page/loader/loader.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { MatDialogModule} from "@angular/material/dialog";
 import { TodoPopupComponent } from './foundation/pages/board-page/popups/todo-popup/todo-popup.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { BoardPopupComponent } from './foundation/pages/board-page/popups/board-popup/board-popup.component';
 import { MarkFilterPipe } from './pipes/mark-filter.pipe';
+import {TokenInterceptor} from "./interceptors/token.interceptor";
 
 @NgModule({
   declarations: [
@@ -46,16 +47,23 @@ import { MarkFilterPipe } from './pipes/mark-filter.pipe';
     BoardPopupComponent,
     MarkFilterPipe,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    DragDropModule,
-    MatDialogModule,
-    BrowserAnimationsModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        DragDropModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
+        FormsModule
+    ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInterceptor
+    }
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
