@@ -1,6 +1,21 @@
 import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
+
+export interface colorOption {
+  title:string,
+  isActive: boolean
+}
+
+export interface optionColors {
+  [index:string]: colorOption
+
+  red: colorOption,
+  green: colorOption,
+  blue: colorOption,
+  white: colorOption,
+  yellow: colorOption
+}
 
 export interface Todo {
   id: number,
@@ -9,7 +24,8 @@ export interface Todo {
   dateExpire: number,
   whoCreate: number,
   whoVerified: number,
-  whoTook: number
+  whoTook: number,
+  optionColor?:optionColors
 }
 
 export interface Board {
@@ -35,8 +51,13 @@ export interface Board {
 export class BoardService implements OnInit{
 
   //Пока урлы будут лежать тут, потом перенесем в окружение (мб)
-  backUrl: string = 'https://kanban322.herokuapp.com'
+  private backUrl: string = 'https://kanban322.herokuapp.com'
 
+  board!: Board
+
+
+
+  obsBoard: BehaviorSubject<Board | null> = new BehaviorSubject<Board|null>(this.board)
 
   constructor(private http:HttpClient) {
   }
@@ -49,8 +70,8 @@ export class BoardService implements OnInit{
     return this.http.get<{board:Board}>(this.backUrl + '/boards/' + id)
   }
 
-  updateBoard(board: Board):Observable<{board:Board}> {
-   return this.http.put<{board:Board}>(this.backUrl + '/boards/' + board._id, {board} )
+  updateBoard():Observable<any> {
+      return this.http.put<{board:Board}>(this.backUrl + '/boards/' + this.board._id, {board:this.board} )
   }
 
   createBoard(title:string, adminsId: number[]): Observable<{board:Board}>{
@@ -59,6 +80,16 @@ export class BoardService implements OnInit{
 
   deleleBoard(id:number){
     return this.http.delete(this.backUrl + '/boards/' + id)
+  }
+
+  deleteTodo(id:number):void{
+    const idx:number = this.board.list.toDo.findIndex(item =>{
+      return item.id === id
+    })
+    if(idx >= 0){
+      this.board.list.toDo.splice(idx, 1)
+      this.obsBoard.next(this.board)
+    }
   }
 
 

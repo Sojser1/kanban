@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {BoardPopupComponent} from "../popups/board-popup/board-popup.component";
-import {Board} from "../../../../services/board.service";
+import {Board, BoardService} from "../../../../services/board.service";
 
 @Component({
   selector: 'app-board-header',
@@ -9,17 +9,18 @@ import {Board} from "../../../../services/board.service";
   styleUrls: ['./board-header.component.scss']
 })
 export class BoardHeaderComponent implements OnInit {
-  @Input() board!: Board
 
-  constructor(private dialogRef: MatDialog) { }
+  constructor(
+    private dialogRef: MatDialog,
+    public BoardService: BoardService
+    ) { }
 
   openSettingPopup(){
     this.dialogRef.open(BoardPopupComponent,{
       data:{
-        board: this.board,
+        board: this.BoardService.board,
       },
       panelClass: 'board-popup',
-
     })
   }
 

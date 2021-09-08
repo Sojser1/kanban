@@ -18,18 +18,7 @@ export class BoardPageComponent implements OnInit {
   hasError: boolean = false
   isLoading: boolean = false
 
-  board: Board = {
-    id: 0,
-    title: '',
-    list: {
-      toDo: [],
-      inWork: [],
-      finished: [],
-      verified: [],
-    },
-    adminsId: [],
-    usersId: []
-  }
+  board!: Board
 
 
   fetchBoard() {
@@ -37,22 +26,16 @@ export class BoardPageComponent implements OnInit {
     this.route.params.subscribe((params:Params) =>{
       this.BoardService.getBoard(params.id)
         .subscribe(res => {
-          this.board = res.board
+          this.BoardService.board = res.board
           this.isLoading = false
         }, error => console.log(error))
     })
   }
 
-  updateList(){
-    this.BoardService.updateBoard(this.board)
-      .subscribe(res => {
-      }, error => console.log(error))
-
-  }
-
 
 
   ngOnInit(): void {
+    this.board = this.BoardService.board
     this.fetchBoard()
 
  }

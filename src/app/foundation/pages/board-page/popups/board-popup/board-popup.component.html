@@ -1,7 +1,7 @@
 <div class="popup">
   <div class="popup__header">
     <div class="popup__header-title" *ngIf="!isEditTitle; else editBlock">
-      <h2>{{board.title | titlecase}}</h2>
+      <h2>{{this.BoardService.board.title | titlecase}}</h2>
       <img
         (click)="isEditTitle = true"
         src="../../../../../../assets/pen.svg">
@@ -15,15 +15,15 @@
           alt="">
       </div>
     </ng-template>
-    <div class="del-btn" [mat-dialog-close] (click)="closePopup()">
+    <div class="del-btn" [mat-dialog-close] >
       <img src="../../../../../../assets/clear.svg">
     </div>
   </div>
   <div class="popup__admins">
-    <p>Админы: <span *ngFor="let admin of board.adminsId">{{admin}}, </span></p>
+    <p>Админы: <span *ngFor="let admin of this.BoardService.board.adminsId">{{admin}}, </span></p>
   </div>
   <div class="popup__users">
-    <p>Пользователи : <span *ngFor="let user of board.usersId">{{user}},</span></p>
+    <p>Пользователи : <span *ngFor="let user of this.BoardService.board.usersId">{{user}},</span></p>
   </div>
   <div class="popup__option">
     <div class="popup__option-deadline">

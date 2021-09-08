@@ -1,6 +1,6 @@
 <ng-container *ngIf="!isLoading; else loader">
-  <app-board-header [board]="board" ></app-board-header>
-  <app-board-body [list]="board.list" (updateList)="updateList()"></app-board-body>
+  <app-board-header></app-board-header>
+  <app-board-body></app-board-body>
 </ng-container>
 
 <ng-template #loader>

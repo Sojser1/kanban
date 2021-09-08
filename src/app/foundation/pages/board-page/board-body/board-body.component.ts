@@ -1,9 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { Todo} from "../../../../services/board.service";
+import {Component, OnInit} from '@angular/core';
+import {BoardService, Todo} from "../../../../services/board.service";
 import {NewTodo} from "./new-todo/new-todo.component";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
-import {TodoPopupComponent} from "../popups/todo-popup/todo-popup.component";
-import {MatDialog} from "@angular/material/dialog";
 
 export interface ColOption {
   title: string,
@@ -25,7 +23,7 @@ export interface OptionColumn {
   styleUrls: ['./board-body.component.scss']
 })
 export class BoardBodyComponent implements OnInit {
-  option: OptionColumn = {
+   option: OptionColumn = {
     toDo: {
       title: 'to do',
       color: '#ea7749',
@@ -50,20 +48,15 @@ export class BoardBodyComponent implements OnInit {
   }
 
   constructor(
-    private dialogRef: MatDialog,
+    public BoardService: BoardService
   ){
   }
 
-
-  @Input() list!: { toDo: Todo[], inWork: Todo[], finished: Todo[], verified: Todo[] }
-
-  @Output() updateList: EventEmitter<null> = new EventEmitter<null>()
-
   isActiveAdd: boolean = false
-  todos: Todo[] = []
-  inWork: Todo[] = []
-  finished: Todo[] = []
-  verified: Todo[] = []
+  todos!: Todo[]
+  inWork!: Todo[]
+  finished!: Todo[]
+  verified!: Todo[]
 
 
   deleteTodo(id:number){
@@ -73,7 +66,8 @@ export class BoardBodyComponent implements OnInit {
 
     this.todos.splice(idx, 1)
 
-    this.updateList.emit()
+    this.updateBoard()
+
   }
 
   createNewTodoObject(newTodo: NewTodo): Todo {
@@ -90,8 +84,14 @@ export class BoardBodyComponent implements OnInit {
   }
 
   addNewTodo(todo:NewTodo){
-    this.todos.push(this.createNewTodoObject(todo))
-    this.updateList.emit()
+    if(this.todos){
+      this.todos.push(this.createNewTodoObject(todo))
+    }
+    this.updateBoard()
+  }
+
+  updateBoard(){
+    this.BoardService.obsBoard.next(this.BoardService.board)
   }
 
   drop(event: CdkDragDrop<Todo[]>, list: Todo[]){
@@ -100,26 +100,21 @@ export class BoardBodyComponent implements OnInit {
     }else{
       moveItemInArray(list, event.previousIndex, event.currentIndex)
     }
-    this.updateList.emit()
+    this.updateBoard()
   }
-
-  openDialog(todo: Todo){
-    this.dialogRef.open(TodoPopupComponent, {
-      data: {
-        todo
-      }
-    })
-  }
-
 
 
 
 
   ngOnInit(): void {
-    this.todos = this.list.toDo
-    this.inWork = this.list.inWork
-    this.finished = this.list.finished
-    this.verified = this.list.verified
+    this.todos = this.BoardService.board.list.toDo
+    this.inWork = this.BoardService.board.list.inWork
+    this.finished = this.BoardService.board.list.finished
+    this.verified = this.BoardService.board.list.verified
+
+    this.BoardService.obsBoard.subscribe(()=>{
+      this.BoardService.updateBoard().subscribe(()=>{})
+    })
   }
 
 }

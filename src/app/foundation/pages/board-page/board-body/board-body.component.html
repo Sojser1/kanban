@@ -13,7 +13,6 @@
         cdkDrag
         *ngFor="let todo of todos"
         [todo]="todo"
-        (openPopup)="openDialog(todo)"
       ></app-todo>
 
     </div>
@@ -39,7 +38,6 @@
     <app-todo
       cdkDrag
       *ngFor="let todo of inWork"
-      (openPopup)="openDialog(todo)"
       [todo]="todo"
     ></app-todo>
 
@@ -55,7 +53,6 @@
     <app-todo
       cdkDrag
       *ngFor="let todo of finished"
-      (openPopup)="openDialog(todo)"
       [todo]="todo"
     ></app-todo>
 
@@ -71,7 +68,6 @@
     <app-todo
       cdkDrag
       *ngFor="let todo of verified"
-      (openPopup)="openDialog(todo)"
       [todo]="todo"
     ></app-todo>
 
