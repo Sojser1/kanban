@@ -1,0 +1,14 @@
+<div class="title">
+  <h2>{{this.BoardService.board?.title | titlecase}}</h2>
+</div>
+
+<div class="participants">
+  Участников: {{this.BoardService.board?.usersId?.length}}
+  <div
+    class="participants-add-btn"
+    (click)="openSettingPopup()">
+    <p>
+      ДОБАВИТЬ
+    </p>
+  </div>
+</div>

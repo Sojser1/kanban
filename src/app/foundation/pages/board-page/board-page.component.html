@@ -1,0 +1,10 @@
+<ng-container *ngIf="!isLoading; else loader">
+  <app-board-header></app-board-header>
+  <app-board-body></app-board-body>
+</ng-container>
+
+<ng-template #loader>
+  <div class="loader">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

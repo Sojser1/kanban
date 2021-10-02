@@ -1,0 +1,88 @@
+:host {
+  color: #ffdead;
+  display: grid;
+  grid-template-columns: 60% 1fr;
+  grid-column-gap: 20px;
+  position: relative;
+}
+
+.textarea {
+  textarea {
+    border: 1px solid #ffdead;
+    outline: none;
+    width: 100%;
+    height: 300px;
+    resize: none;
+    background: #2c2f33;
+    color: #ffdead;
+    padding: 5px 10px;
+  }
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &-datepicker {
+    display: flex;
+
+    input {
+      border: none;
+      border-bottom: 1px solid #ffdead;
+      outline: none;
+      color: #ffdead;
+      background-color: #2c2f33;
+      width: 70%;
+    }
+  }
+
+  &-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .btn {
+      text-transform: uppercase;
+      font-size: 12px;
+      cursor: pointer;
+      text-align: center;
+      padding: 2px 6px;
+      transition: .2s;
+
+
+    }
+
+    .option-save-btn {
+      &:hover {
+        color: #d2b05e;
+        transition: .3s;
+      }
+
+    }
+
+    .option-del-btn {
+      color: #b41010;
+
+      &:hover {
+        color: #d91d1d;
+        transition: .3s;
+      }
+    }
+  }
+
+
+}
+
+.close-btn {
+  position: absolute;
+  cursor: pointer;
+  top: -15px;
+  right: -15px;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+
+}

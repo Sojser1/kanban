@@ -1,0 +1,14 @@
+<form class="card" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="login-container">
+    <span class="login-title">Создать аккаунт</span>
+    <div class="login-input">
+      <input formControlName="login" type="text" placeholder="Введите имя пользователя" class="login-page-input" name="login">
+    </div>
+    <div class="login-input">
+      <input formControlName="password" type="password" placeholder="Введите пароль" class="login-page-input" name="password">
+    </div>
+    <div class="login-input">
+      <input type="submit" class="btn btn-default" [disabled]="form.invalid || form.disabled" value="Зарегистрироваться">
+    </div>
+  </div>
+</form>

@@ -1,0 +1,13 @@
+<textarea
+  type="text"
+  placeholder="Введите задачу"
+  #textareaValue
+  (keydown.enter)="createTodo(textareaValue.value)"
+></textarea>
+
+<div
+  class="board-btn"
+  (click)="createTodo(textareaValue.value)"
+>
+  <p>Добавить задачу</p>
+</div>

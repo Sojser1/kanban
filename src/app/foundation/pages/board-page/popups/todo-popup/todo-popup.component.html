@@ -1,0 +1,26 @@
+<div class="textarea">
+  <textarea
+    matInput
+    cdkTextarea
+    [(ngModel)]="textareaValue"
+  ></textarea>
+</div>
+<div class="option">
+  <div class="option-datepicker">
+    <input matInput [matDatepicker]="datePicker" [(ngModel)]="datePickerValue" type="text">
+    <mat-datepicker-toggle [for]="datePicker"></mat-datepicker-toggle>
+    <mat-datepicker #datePicker></mat-datepicker>
+  </div>
+  <div class="option-btn">
+    <div class="option-save-btn btn" [mat-dialog-close] (click)="saveSettings() ">
+      сохранить
+    </div>
+    <div class="option-del-btn btn" [mat-dialog-close] (click)="deleteTodo() ">
+      удалить
+    </div>
+  </div>
+
+</div>
+<div class="close-btn" [mat-dialog-close] >
+  <img src="../../../../../../assets/clear.svg">
+</div>
